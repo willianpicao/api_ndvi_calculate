@@ -1,17 +1,3 @@
-# from sentinelsat import SentinelAPI, geojson_to_wkt, make_path_filter
-# from rasterio.warp import transform_geom
-# from shapely.geometry import Polygon
-# from rasterio.mask import mask
-# from dotenv import load_dotenv
-# from datetime import datetime
-# from rasterio import plot
-# import numpy as np
-# import rasterio
-# import pyproj
-# import json
-# import glob
-# import os
-#
 import logging
 import json
 from oauthlib.oauth2 import BackendApplicationClient
@@ -21,7 +7,6 @@ import io
 from dotenv import load_dotenv
 import os
 
-# from calculate_veg_index import VegetativeIndexProcessor
 from LandsatRegionNDVICalculator import LandsatRegionNDVICalculator
 
 def calculate_ndvi(**params):
@@ -67,35 +52,11 @@ def calculate_ndvi(**params):
     else return [0, 0.27, 0]
     }
     """
-    
-    # # Instanciando a classe VegetativeIndexProcessor passando as credenciais
-    # processor = VegetativeIndexProcessor('robsonsilvalopes', 'CUzixj!fg4')
     # Configuração básica de logging
     logging.basicConfig(level=logging.INFO)
 
-    # Exemplo de variável
-    client_id = params['client_id']
-
-    # Imprimir o conteúdo da variável em um log de informações
-    logging.info(f'O conteúdo de client_id é: {client_id}')
     copernicus_downloader = LandsatRegionNDVICalculator(params['client_id'], params['client_secret'])
-    # Exemplo de variável
-    client_secret = params['client_secret']
-
-    # Imprimir o conteúdo da variável em um log de informações
-    logging.info(f'O conteúdo de client_secret é: {client_secret}')
-    # # # Definindo o arquivo que contém as coordenadas
-    # processor.set_file(params['file_gj'])
-
-    # # # Definindo as datas de início e fim, respectivamente
-    # processor.set_date(params['dt_inicio'], params['dt_fim'])
-
-    # # # Definindo a porcentagem máxima de núvens
-    # processor.set_cloud(params['cobertura'])
-
-    # # # Cálculo do NDVI e salvando em um arquivo tiff
-    # ndvi = processor.calculate_ndvi()
-    # processor.save(ndvi, params['file_gj']+"ndvi")
+    
     cloud_cover = int(params['cobertura'])
     copernicus_downloader.download_image(params['file_gj'], params['dt_inicio'], params['dt_fim'],cloud_cover, evalscript)
 

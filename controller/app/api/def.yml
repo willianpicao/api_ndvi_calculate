@@ -77,38 +77,6 @@ paths:
           description: Erro interno.
         "5XX":
           description: Erro inesperado.
-  /executa:
-    post:
-      description: Realiza a operação desejada
-      operationId: controller.executa
-      requestBody:
-        content:
-          multipart/form-data:
-            schema:
-              type: object
-              properties:
-                operando1:
-                  type: integer
-                  description: "Operando 01"
-                operando2:
-                  type: integer
-                  description: "Operando 02"
-                operador:
-                  type: string
-                  description: "Operacao. Ex. + - *"                
-      responses:
-        "200":
-          description: >
-            Retorna o codigo do Job
-          content:
-            "application/json":
-              schema:
-                type: object
-                properties:
-                  job_id:
-                    type: string
-        "400":
-          description: Requisição mal formatada. Por exemplo, ausência, na requisição, de algum parâmetro obrigatório
   /calculate_ndvi:
     post:
       description: Recebe um intevalo de tempo e arquivo geojson e retorna o ndvi

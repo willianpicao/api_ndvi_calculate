@@ -51,32 +51,6 @@ services:
     stdin_open: true
     tty: true
   
-  worker-math:
-      build:
-        # context: worker-db
-        # dockerfile: Dockerfile
-        context: .
-        dockerfile: ./wk_math/Dockerfile
-      environment:
-        - PYTHONPATH=$PALANTIR_HOME
-        - PYTHONUNBUFFERED=TRUE
-      # The Worker should be in the same directory that functions. Otherwise,
-      # is necessary to specify the functions path.
-      # dbscan é a fila de jobs usada pelo serviço
-      command: rq worker --path /code/app --url redis://redis:6379 math
-
-      # To debug the Worker. In addition to the line below, you should log into
-      # the docker container and manually execute the above command.
-      # entrypoint: ["sh", "-c", "sleep 2073600"]
-
-      # Redis server needs to start before Worker module. Otherwise, the Worker
-      # will attempt unsuccessfully establish a connection to the Redis manager,
-      # causing the container broken.
-      depends_on:
-        - redis
-      volumes:
-      - ./files:/code/app/files/
-  
   worker-geovi:
       build:
         # context: worker-db

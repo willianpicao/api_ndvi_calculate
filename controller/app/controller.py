@@ -63,22 +63,6 @@ def check_status(job_id):
         'job_status': job.get_status(),
         }
 
-def executa():
-    logging.info('<controller>  --------------Call rote /executa ----------------')
-    
-    params = {
-        'operando1' : request.form['operando1'],
-        'operando2' : request.form['operando2'],
-        'operador' : request.form['operador']        
-        }
-    
-    q = Queue('math',connection=redis_conn)
-    job = q.enqueue('main.operacao', kwargs=params)
-   
-    return {
-        'job_id':job.id,
-    }
-
 def get_ndvi(job_id):
     
     logging.info('<controller>  --------------Call rote /get_NDVI----------------')
