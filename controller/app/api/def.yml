@@ -1,7 +1,7 @@
 openapi: "3.0.3"
 
 info:
-  title: Sistema exemplo que executa algumas operacao
+  title: Documentação Swagger API
   description: >
     Teste
   version: "1.0"

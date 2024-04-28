@@ -66,8 +66,7 @@ class LandsatRegionNDVICalculator:
                     {
                         "identifier": "default",
                         "format": {
-                            "type": "image/jpeg",
-                            "quality": 100,
+                            "type": "image/tiff"
                         },
                     }
                 ],
@@ -81,7 +80,7 @@ class LandsatRegionNDVICalculator:
         if response.status_code == 200:
             content = response.content
             image = Image.open(io.BytesIO(content))
-            image.save('output_image.jpeg', 'JPEG')
+            image.save('output_image.tiff', 'TIFF')
             print("Imagem salva com sucesso.")
         else:
             print("Erro ao obter a imagem. Código de status:", response.status_code)
