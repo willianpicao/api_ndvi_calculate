@@ -35,21 +35,21 @@ RESULT_TTL = 18000 # 5 hours
 # By default a job has 180 seconds to complete 
 JOB_TIMEOUT = 3600
 
-def get_result(job_id):
-    logging.info('<controller>  --------------Call rote /get_result ----------------')
-    try:
-        job = Job.fetch(job_id, connection=redis_conn)
-    except Exception as exception:
-        return {"job_id": job_id, "job_status": 'error'}, 404
+# def get_result(job_id):
+#     logging.info('<controller>  --------------Call rote /get_result ----------------')
+#     try:
+#         job = Job.fetch(job_id, connection=redis_conn)
+#     except Exception as exception:
+#         return {"job_id": job_id, "job_status": 'error'}, 404
 
-    if not job.result: # If not have results, return empty values
-        return {'job_id': job.id, 'result': ''}, 404
+#     if not job.result: # If not have results, return empty values
+#         return {'job_id': job.id, 'result': ''}, 404
 
-    return {
-            'job_id (Parameter)': job.id,
-            'operacao': job.result['operacao'],
-            'resultado': job.result['resultado']
-        }
+#     return {
+#             'job_id (Parameter)': job.id,
+#             'operacao': job.result['operacao'],
+#             'resultado': job.result['resultado']
+#         }
 
 def check_status(job_id):
     logging.info('<controller>  --------------Call rote /check_status ----------------')
@@ -63,21 +63,21 @@ def check_status(job_id):
         'job_status': job.get_status(),
         }
 
-def get_ndvi(job_id):
+# def get_ndvi(job_id):
     
-    logging.info('<controller>  --------------Call rote /get_NDVI----------------')
-    try:
-        job = Job.fetch(job_id, connection=redis_conn)
-    except Exception as exception:
-        return {"job_id": job_id, "job_status": 'error'}, 404
+#     logging.info('<controller>  --------------Call rote /get_NDVI----------------')
+#     try:
+#         job = Job.fetch(job_id, connection=redis_conn)
+#     except Exception as exception:
+#         return {"job_id": job_id, "job_status": 'error'}, 404
 
-    if not job.result: # If not have results, return empty values
-        return {'job_id': job.id, 'result': ''}, 404
+#     if not job.result: # If not have results, return empty values
+#         return {'job_id': job.id, 'result': ''}, 404
 
-    return {
-            'job_id (Parameter)': job.id,
-            'resultado': job.result['resultado']
-        }
+#     return {
+#             'job_id (Parameter)': job.id,
+#             'resultado': job.result['resultado']
+#         }
 
 def calculate_ndvi():  
     

@@ -1,3 +1,4 @@
+import datetime
 import json
 from oauthlib.oauth2 import BackendApplicationClient
 from requests_oauthlib import OAuth2Session
@@ -27,6 +28,12 @@ class LandsatRegionNDVICalculator:
     def _format_date(self, date):
         # Formata a data no formato esperado pelo serviço Copernicus
         return f"{date}T00:00:00Z"
+    
+    # Função para garantir que um diretório da saida de imagem exista, se não existir, ele será criado
+    @staticmethod
+    def ensure_directory_exists(directory):
+        if not os.path.exists(directory):
+            os.makedirs(directory)
 
     def download_image(self, geojson_file_path, start_date, end_date,cloudCoverage, evalscript):
         with open(geojson_file_path, 'r') as file:
@@ -80,8 +87,22 @@ class LandsatRegionNDVICalculator:
         if response.status_code == 200:
             content = response.content
             image = Image.open(io.BytesIO(content))
-            image.save('output_image.tiff', 'TIFF')
-            print("Imagem salva com sucesso.")
+            # Obter a data e hora atual
+            now = datetime.datetime.now()
+    
+            # Formatar a data e hora no formato desejado
+            timestamp = now.strftime("%d_%m_%Y_%H_%M_%S")
+            
+            # Criar o nome do diretório baseado no timestamp
+            directory = f"/code/images/{timestamp}"
+
+            # Garantir que o diretório exista no container
+            self.ensure_directory_exists(directory)
+
+            # Gerar o nome do arquivo com base no timestamp
+            filename = f"{directory}/output_image.tiff"  # Caminho completo com o nome do arquivo
+            image.save(filename, 'TIFF')
+            print(f"Imagem salva com sucesso em {filename}")
         else:
             print("Erro ao obter a imagem. Código de status:", response.status_code)
             print(response.text)

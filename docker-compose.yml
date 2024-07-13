@@ -57,6 +57,7 @@ services:
         # dockerfile: Dockerfile
         context: .
         dockerfile: ./wk_geovi/Dockerfile
+      container_name: worker_geovi_container
       environment:
         - PYTHONPATH=$PALANTIR_HOME
         - PYTHONUNBUFFERED=TRUE
@@ -76,6 +77,7 @@ services:
         - redis
       volumes:
       - ./files:/code/app/files/
+      - ./images:/code/images
   
   redis:
     image: "redis:alpine"

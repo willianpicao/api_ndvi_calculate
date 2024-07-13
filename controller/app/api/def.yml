@@ -10,40 +10,6 @@ servers:
   - url: http://localhost:8080/v1
 
 paths:
-  /get_result/{job_id}:
-    get:
-      description: Retorna o resultado 
-      operationId: controller.get_result
-      parameters:
-        - name: "job_id"
-          in: "path"
-          required: true
-          schema:
-            type: "string"
-          required: true
-      responses:
-        #! TODO: implementar retorno das datas (start_date e end_date)
-        "200":
-          description: Arquivo Zip com planos de ensinos pdf assinados digitalmente
-          content:
-            "application/json":
-              schema:
-                type: object
-                properties:
-                  job_id:
-                    type: string
-                  operacao:
-                    type: string
-                  resultado:
-                    type: string
-        "400":
-          description: Requisição mal formatada. Por exemplo, ausência, na requisição, de algum parâmetro obrigatório
-        "401":
-          description: Informação de autorização é inválida ou ausente.
-        "404":
-          description: Job não encontrado na fila de trabalhos prontos.
-        "5XX":
-          description: Erro inesperado.
   /check_status:
     get:
       description: Retorna o status de um trabalho prévio
@@ -117,38 +83,6 @@ paths:
                 type: object
                 properties:
                   jobid:
-                    type: string
-        "400":
-          description: Requisição mal formatada. Por exemplo, ausência, na requisição, de algum parâmetro obrigatório
-        "401":
-          description: Informação de autorização é inválida ou ausente.
-        "404":
-          description: Job não encontrado na fila de trabalhos prontos.
-        "5XX":
-          description: Erro inesperado.
-  /get_ndvi/{job_id}:
-    get:
-      description: Retorna o resultado 
-      operationId: controller.get_ndvi
-      parameters:
-        - name: "job_id"
-          in: "path"
-          required: true
-          schema:
-            type: "string"
-          required: true
-      responses:
-        #! TODO: implementar retorno das datas (start_date e end_date)
-        "200":
-          description: Arquivo Zip com planos de ensinos pdf assinados digitalmente
-          content:
-            "application/json":
-              schema:
-                type: object
-                properties:
-                  job_id:
-                    type: string
-                  resultado:
                     type: string
         "400":
           description: Requisição mal formatada. Por exemplo, ausência, na requisição, de algum parâmetro obrigatório
